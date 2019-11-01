@@ -1,3 +1,5 @@
+//lage handlebars for å legge inn htlm og lage en pdf fil med react
+
 require("dotenv").config();
 
 const nodemailer = require("nodemailer");
@@ -19,13 +21,19 @@ let mailOptions = {
   to: "dengjoak@gmail.com",
   subject: "Betaling av Månedens faktura",
   text: "Hei, dett er en automatisk faktura sendt med anthill",
+  attachments: [
+    {
+      filename: "invoice.pdf",
+      path: "./invoice.pdf"
+    }
+  ],
+
   html: `<!doctype html>
   <html>
   
   <head>
       <meta charset="utf-8">
-      <title>A simple, clean, and responsive HTML invoice template</title>
-  
+      <title>PDF Result Template</title>
       <style>
           .invoice-box {
               max-width: 800px;
@@ -35,8 +43,15 @@ let mailOptions = {
               box-shadow: 0 0 10px rgba(0, 0, 0, .15);
               font-size: 16px;
               line-height: 24px;
-              font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-              color: #555;
+              font-family: 'Helvetica Neue', 'Helvetica', color: #555;
+          }
+          
+          .margin-top {
+              margin-top: 50px;
+          }
+          
+          .justify-center {
+              text-align: center;
           }
           
           .invoice-box table {
@@ -103,20 +118,6 @@ let mailOptions = {
                   text-align: center;
               }
           }
-          /** RTL **/
-          
-          .rtl {
-              direction: rtl;
-              font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-          }
-          
-          .rtl table {
-              text-align: right;
-          }
-          
-          .rtl table tr td:nth-child(2) {
-              text-align: left;
-          }
       </style>
   </head>
   
@@ -127,112 +128,49 @@ let mailOptions = {
                   <td colspan="2">
                       <table>
                           <tr>
-                              <td class="title">
-                                  <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
-                              </td>
-  
+                              
                               <td>
-                                  Invoice #: 1
-                                  <br> Created: January 1, 2019
-                                  <br> Due: January 14, 2019
+                                  Date: 01.11.2019
                               </td>
                           </tr>
                       </table>
                   </td>
               </tr>
-  
               <tr class="information">
                   <td colspan="2">
                       <table>
                           <tr>
                               <td>
-                                  anthill, Inc.
-                                  <br> 12345 Sunny Road
-                                  <br> Sunnyville, CA 12345
+                                  Customer name: Deng Wuor Joak
                               </td>
-  
                               <td>
-                                  Anthill
-                                  <br> John Doe
-                                  <br> fakturaanthill@gmail.com
+                                  Receipt number: 1
                               </td>
                           </tr>
                       </table>
                   </td>
               </tr>
-  
               <tr class="heading">
-                  <td>
-                      Payment Method
-                  </td>
-  
-                  <td>
-                      Check #
-                  </td>
+                  <td>Bought items:</td>
+                  <td>Price</td>
               </tr>
-  
-              <tr class="details">
-                  <td>
-                      Check
-                  </td>
-  
-                  <td>
-                      1000
-                  </td>
-              </tr>
-  
-              <tr class="heading">
-                  <td>
-                      Item
-                  </td>
-  
-                  <td>
-                      Price
-                  </td>
-              </tr>
-  
               <tr class="item">
-                  <td>
-                      Website design
-                  </td>
-  
-                  <td>
-                      $300.00
-                  </td>
+                  <td>First item:</td>
+                  <td>1$</td>
               </tr>
-  
               <tr class="item">
-                  <td>
-                      Hosting (3 months)
-                  </td>
-  
-                  <td>
-                      $75.00
-                  </td>
-              </tr>
-  
-              <tr class="item last">
-                  <td>
-                      Domain name (1 year)
-                  </td>
-  
-                  <td>
-                      $10.00
-                  </td>
-              </tr>
-  
-              <tr class="total">
-                  <td></td>
-  
-                  <td>
-                      Total: $385.00
-                  </td>
+                  <td>Second item:</td>
+                  <td>2000$</td>
+                  
               </tr>
           </table>
+          <br />
+          <h1 class="justify-center">Total price: 2001$ </h1>
+
+          <button>Betal nå</button>
       </div>
   </body>
-  
-  </html>
+  </html
   `
 };
 
