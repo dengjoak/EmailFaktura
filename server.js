@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const nodemailer = require("nodemailer");
 
-// Step 1
+// Steg 1 legger til passord og transporter
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -12,8 +12,10 @@ let transporter = nodemailer.createTransport({
   }
 });
 
+// Steg 2 Innholdet i mailen
+
 let mailOptions = {
-  from: "ANTHILLFAKURERING@NOREPLY.NO",
+  from: "noreply",
   to: "dengjoak@gmail.com",
   subject: "Betaling av Månedens faktura",
   text: "Hei, dett er en automatisk faktura sendt med anthill",
@@ -234,7 +236,7 @@ let mailOptions = {
   `
 };
 
-//Step 3
+//Steg 3 Sender mail og bekreftelse eller feilmelding
 
 transporter.sendMail(mailOptions, function(err, data) {
   if (err) {
